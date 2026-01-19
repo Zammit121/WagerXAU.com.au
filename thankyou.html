@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Welcome to WagerX AU! 🎉</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .thankyou {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            background: 
+                linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, transparent 50%),
+                var(--color-gray-100);
+        }
+        
+        .thankyou__card {
+            background: var(--color-white);
+            padding: 60px 48px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            max-width: 560px;
+            width: 100%;
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .thankyou__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background: var(--color-primary-subtle);
+            border-radius: 50%;
+            margin-bottom: 32px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+            }
+        }
+        
+        .thankyou__icon i {
+            font-size: 3rem;
+            color: var(--color-primary);
+        }
+        
+        .thankyou__title {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .thankyou__subtitle {
+            font-size: 1.25rem;
+            color: var(--color-gray-600);
+            margin-bottom: 40px;
+        }
+        
+        .discord-box {
+            background: var(--color-gray-100);
+            padding: 32px;
+            border-radius: var(--radius-md);
+            margin-bottom: 32px;
+        }
+        
+        .discord-box__label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+        
+        .discord-box__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #5865F2;
+            word-break: break-all;
+        }
+        
+        .discord-box__link i {
+            font-size: 2rem;
+        }
+        
+        .thankyou__steps {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        
+        .thankyou__steps h3 {
+            font-size: 1.125rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .thankyou__steps ol {
+            counter-reset: steps;
+            list-style: none;
+        }
+        
+        .thankyou__steps li {
+            counter-increment: steps;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        
+        .thankyou__steps li:last-child {
+            border-bottom: none;
+        }
+        
+        .thankyou__steps li::before {
+            content: counter(steps);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        
+        .thankyou__steps li span {
+            color: var(--color-gray-700);
+        }
+        
+        .thankyou__cta {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn--discord {
+            background: #5865F2;
+            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.25);
+        }
+        
+        .btn--discord:hover {
+            background: #4752C4;
+            box-shadow: 0 12px 35px rgba(88, 101, 242, 0.35);
+        }
+        
+        .thankyou__footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-gray-200);
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+        }
+        
+        .thankyou__footer a {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 480px) {
+            .thankyou__card {
+                padding: 40px 24px;
+            }
+            
+            .thankyou__title {
+                font-size: 2rem;
+            }
+            
+            .thankyou__icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .thankyou__icon i {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="thankyou">
+        <div class="thankyou__card">
+            <div class="thankyou__icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <h1 class="thankyou__title">You're In, Mate! 🎉</h1>
+            <p class="thankyou__subtitle">
+                Welcome to WagerX. Time to start stacking those wins.
+            </p>
+            
+            <div class="discord-box">
+                <p class="discord-box__label">Your Private Discord Access</p>
+                <a href="https://discord.gg/XKvyHPbJ" target="_blank" class="discord-box__link">
+                    <i class="fab fa-discord"></i>
+                    discord.gg/XKvyHPbJ
+                </a>
+            </div>
+            
+            <div class="thankyou__steps">
+                <h3>What to Do Next:</h3>
+                <ol>
+                    <li>
+                        <span><strong>Join the Discord</strong> – Click the link above and request access. We'll verify you within minutes.</span>
+                    </li>
+                    <li>
+                        <span><strong>Check #getting-started</strong> – Read the guides and set up your notification preferences.</span>
+                    </li>
+                    <li>
+                        <span><strong>Turn on alerts</strong> – Make sure you enable Discord notifications so you don't miss any arbs!</span>
+                    </li>
+                    <li>
+                        <span><strong>Say g'day</strong> – Introduce yourself in #general. The community's here to help you win.</span>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="thankyou__cta">
+                <a href="https://discord.gg/XKvyHPbJ" target="_blank" class="btn btn--discord btn--full">
+                    <i class="fab fa-discord"></i>
+                    Join Discord Now
+                </a>
+                <a href="index.html" class="btn btn--outline btn--full">
+                    Back to WagerX AU
+                </a>
+            </div>
+            
+            <div class="thankyou__footer">
+                <p>Questions? Hit us up at <a href="mailto:info@wagerx.com.au">info@wagerx.com.au</a></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+

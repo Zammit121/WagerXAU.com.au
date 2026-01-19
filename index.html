@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WagerX AU: AI-powered sports betting picks and arbitrage for Aussies.">
+    <title>WagerX AU | Sports Betting Picks & Arbitrage</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --dark: #0a0a0a;
+            --dark-card: #141414;
+            --dark-border: #262626;
+            --gray: #a3a3a3;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--white);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--white);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn--primary {
+            background: var(--green);
+            color: var(--dark);
+        }
+
+        .btn--primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--dark-border);
+        }
+
+        .btn--outline:hover {
+            border-color: var(--gray);
+        }
+
+        .btn--large {
+            padding: 16px 32px;
+            font-size: 1rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: radial-gradient(ellipse at center top, #0f1f0f 0%, var(--dark) 60%);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+        }
+
+        .badge__dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            color: var(--green);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--gray);
+            max-width: 500px;
+            margin: 0 auto 48px;
+        }
+
+        .hero__cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .hero__stats {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat__value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .stat__label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 24px;
+            background: var(--dark);
+        }
+
+        .features__inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .features__header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .features__header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .features__header p {
+            color: var(--gray);
+            font-size: 1.125rem;
+        }
+
+        .features__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .features__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .feature__icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--green);
+        }
+
+        .feature h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        /* Advantage Section */
+        .advantage {
+            padding: 100px 24px;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .advantage__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .advantage__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 24px;
+        }
+
+        .advantage h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .advantage h2 span {
+            color: var(--green);
+        }
+
+        .advantage__subtitle {
+            color: var(--gray);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+
+        .advantage__grid {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .advantage__grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .advantage__card {
+            flex: 0 0 280px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: left;
+            scroll-snap-align: start;
+            transition: all 0.3s;
+        }
+
+        .advantage__card:hover {
+            border-color: rgba(34, 197, 94, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .advantage__icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 1.25rem;
+            color: var(--green);
+        }
+
+        .advantage__card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .advantage__card p {
+            font-size: 0.875rem;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .advantage__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        .advantage__tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        @media (min-width: 1024px) {
+            .advantage__grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                overflow: visible;
+            }
+            
+            .advantage__card {
+                flex: none;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .advantage__grid {
+                margin: 0 -24px;
+                padding: 0 24px 20px;
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, var(--dark) 0%, #0f1f0f 50%, var(--dark) 100%);
+            text-align: center;
+        }
+
+        .cta__inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--gray);
+            font-size: 1.125rem;
+            margin-bottom: 32px;
+        }
+
+        .cta-section .btn {
+            margin-bottom: 24px;
+        }
+
+        .spots-remaining {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .spots-remaining span:last-of-type {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* Counter styling */
+        .spots-counter .stat__value {
+            color: var(--green);
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, var(--dark) 0%, #0f1f0f 50%, var(--dark) 100%);
+            overflow: hidden;
+        }
+
+        .reviews__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .reviews__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .reviews h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .reviews h2 span {
+            color: var(--green);
+        }
+
+        .reviews__subtitle {
+            color: var(--gray);
+            margin-bottom: 48px;
+        }
+
+        .reviews__track {
+            margin: 0 -24px;
+            padding: 20px 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .reviews__track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .reviews__slider {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .review-card {
+            flex: 0 0 320px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #141414 100%);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: left;
+        }
+
+        .review-card--add {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.05);
+            transition: all 0.3s;
+        }
+
+        .review-card--add:hover {
+            border-color: var(--green);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .review-card__add {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 50%;
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            color: var(--green);
+        }
+
+        .review-card--add h4 {
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .review-card--add p {
+            font-size: 0.8125rem;
+            color: var(--gray);
+        }
+
+        .review-card__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .review-card__header img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--dark-border);
+        }
+
+        .review-card__header h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .review-card__header span {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: -8px;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: var(--dark);
+            border: 1px solid var(--dark-border);
+            border-radius: 100px;
+            font-size: 0.625rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .verified-badge i {
+            color: var(--green);
+            font-size: 0.5rem;
+        }
+
+        .review-card__stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            color: var(--green);
+            font-size: 0.875rem;
+        }
+
+        .review-card p {
+            font-size: 0.875rem;
+            color: var(--gray);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .review-card--empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--dark-border);
+            background: transparent;
+            min-height: 180px;
+        }
+
+        .review-card--empty p {
+            text-align: center;
+            color: #525252;
+            font-style: normal;
+        }
+
+        /* Review Modal Extras */
+        .review-modal {
+            max-width: 450px;
+        }
+
+        .review-modal .modal__close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            font-size: 1.5rem;
+        }
+
+        .star-rating i {
+            color: var(--dark-border);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating i.active,
+        .star-rating i:hover {
+            color: var(--green);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--dark);
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal__content {
+            position: relative;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .form__group {
+            margin-bottom: 16px;
+        }
+
+        .form__group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form__group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--dark);
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .form__group input:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        /* Bookies Section */
+        .bookies {
+            padding: 80px 24px;
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .bookies__inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bookies__label {
+            font-size: 0.875rem;
+            color: var(--green);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .bookies__list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px 32px;
+            margin-bottom: 48px;
+        }
+
+        .bookies__list span {
+            font-size: 0.9375rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .bookies__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .bookie-card {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            padding: 8px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .bookies__grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .bookies__list {
+                gap: 12px 20px;
+            }
+            
+            .bookies__list span {
+                font-size: 0.8125rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            padding: 48px 24px;
+            background: var(--dark);
+            border-top: 1px solid var(--dark-border);
+            text-align: center;
+        }
+
+        .footer__logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer p {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .footer__links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .footer__links a {
+            color: var(--gray);
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .footer__links a:hover {
+            color: var(--white);
+        }
+
+        .footer__legal {
+            font-size: 0.75rem;
+            color: #525252;
+        }
+
+
+        /* Mobile Nav */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero__stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__inner">
+            <a href="#" class="logo">WagerX AU</a>
+            <nav class="nav">
+                <a href="#features">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="https://discord.gg/XKvyHPbJ" class="btn btn--primary" style="color: #fff; font-weight: 800;">Start Winning</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="badge">
+            <span class="badge__dot"></span>
+            Live Picks Daily
+        </div>
+        <h1>No BS Sports Betting<br><span>Picks & Arbitrage</span></h1>
+        <p>Join Australia's smartest punters. AI-powered picks, real-time alerts, and a community that wins together.</p>
+        <div class="hero__cta">
+            <a href="https://discord.gg/XKvyHPbJ" class="btn btn--primary btn--large" id="joinBtn">
+                Claim Your Free Spot
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <span style="font-size: 0.875rem; color: var(--gray);">100% Free - Until target users reached!</span>
+        </div>
+        <div class="hero__stats">
+            <div class="stat spots-counter">
+                <div class="stat__value" id="spotsLeft">2,998</div>
+                <div class="stat__label">Free Spots Remaining</div>
+            </div>
+            <div class="stat">
+                <div class="stat__value">$5K+</div>
+                <div class="stat__label">Won This Month</div>
+            </div>
+            <div class="stat">
+                <div class="stat__value">24/7</div>
+                <div class="stat__label">AI Scanning</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="features__inner">
+            <div class="features__header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to start winning</p>
+            </div>
+            <div class="features__grid">
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Scans Bookies</h3>
+                    <p>Our AI analyzes odds from every major bookie to find the best opportunities.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Get Instant Alerts</h3>
+                    <p>Receive real-time notifications in Discord when profitable picks drop.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature__icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Cash In</h3>
+                    <p>Follow the picks, place your bets, and watch your bankroll grow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantage Section -->
+    <section class="advantage">
+        <div class="advantage__inner">
+            <div class="advantage__badge">
+                <i class="fas fa-sparkles"></i>
+                Everything Included
+            </div>
+            <h2>Your Advantage Over <span>The Bookies</span></h2>
+            <p class="advantage__subtitle">The proven tools and strategies our members rely on to stack consistent wins from sports betting.</p>
+            
+            <div class="advantage__grid">
+                <div class="advantage__card">
+                    <div class="advantage__icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Bonus Extraction Guide</h3>
+                    <p>Learn how to convert bookie sign-up offers into locked-in cash using our proven method.</p>
+                    <div class="advantage__tag">$1k+ Per Bonus</div>
+                </div>
+                
+                <div class="advantage__card">
+                    <div class="advantage__icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Risk-Free Betting Method</h3>
+                    <p>A systematic approach that locks in profit no matter which team wins the match.</p>
+                    <div class="advantage__tag">Zero Risk</div>
+                </div>
+                
+                <div class="advantage__card">
+                    <div class="advantage__icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Private Discord Crew</h3>
+                    <p>Connect with thousands of Aussie punters sharing wins, tips, and strategies daily.</p>
+                    <div class="advantage__tag">24/7 Support</div>
+                </div>
+                
+                <div class="advantage__card">
+                    <div class="advantage__icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Smart AI Analysis</h3>
+                    <p>Our AI scans every market across all major bookies to surface the highest-value plays.</p>
+                    <div class="advantage__tag">82% Win Rate</div>
+                </div>
+                
+                <div class="advantage__card">
+                    <div class="advantage__icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Notifications</h3>
+                    <p>Get pinged the moment a profitable opportunity lands so you can act fast.</p>
+                    <div class="advantage__tag">Never Miss Out</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="pricing">
+        <div class="cta__inner">
+            <h2>Ready to Start Winning?</h2>
+            <p>Join thousands of Aussie punters already cashing in with WagerX AU.</p>
+            <a href="https://discord.gg/XKvyHPbJ" class="btn btn--primary btn--large">
+                Join Free Now
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <div class="spots-remaining">
+                <span class="pulse-dot"></span>
+                <span id="spotsLeft2">2,998</span> free spots remaining
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+        <div class="reviews__inner">
+            <div class="reviews__badge">
+                <i class="fas fa-star"></i>
+                Leave a Review = Free Lifetime Access
+            </div>
+            <h2>The Extra Income <span>You Always Wanted</span></h2>
+            <p class="reviews__subtitle">Review for FREE membership for life! Limited to the first 1,000 reviews.</p>
+            
+            <div class="reviews__track">
+                <div class="reviews__slider" id="reviewsSlider">
+                    <!-- Write Review Card -->
+                    <div class="review-card review-card--add" onclick="openReviewModal()">
+                        <div class="review-card__add">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h4>Write a Review</h4>
+                        <p>Share your experience & get FREE lifetime access</p>
+                    </div>
+                    
+                    <!-- Empty placeholder cards -->
+                    <div class="review-card review-card--empty">
+                        <p>Be the first to share your experience!</p>
+                    </div>
+                    <div class="review-card review-card--empty">
+                        <p>Your review could be here...</p>
+                    </div>
+                    <div class="review-card review-card--empty">
+                        <p>Join & leave a review!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal">
+        <div class="modal__content review-modal">
+            <button class="modal__close" onclick="closeReviewModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3>Write Your Review</h3>
+            <p style="color: var(--gray); margin-bottom: 24px; font-size: 0.875rem;">
+                <i class="fas fa-gift" style="color: var(--green);"></i>
+                Leave a review to unlock FREE lifetime access!
+            </p>
+            <form onsubmit="submitReview(event)">
+                <div class="form__group">
+                    <label>Your Name</label>
+                    <input type="text" id="reviewName" placeholder="John D." required>
+                </div>
+                <div class="form__group">
+                    <label>Location</label>
+                    <input type="text" id="reviewLocation" placeholder="Sydney, Australia" required>
+                </div>
+                <div class="form__group">
+                    <label>Rating</label>
+                    <div class="star-rating" id="starRating">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label>Your Review</label>
+                    <textarea id="reviewText" placeholder="Share your experience with WagerX AU..." rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--large" style="width: 100%;">
+                    Submit & Get Free Access
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bookies Section -->
+    <section class="bookies">
+        <div class="bookies__inner">
+            <p class="bookies__label">Bookies Supported</p>
+            <div class="bookies__list">
+                <span>TAB</span>
+                <span>Sportsbet</span>
+                <span>Ladbrokes</span>
+                <span>Bet365</span>
+                <span>Neds</span>
+                <span>PointsBet</span>
+                <span>Unibet</span>
+                <span>BetEasy</span>
+                <span>BlueBet</span>
+                <span>TopSport</span>
+                <span>Palmerbet</span>
+                <span>PlayUp</span>
+                <span>BoomBet</span>
+                <span>Betfair</span>
+                <span>Picklebet</span>
+            </div>
+            <div class="bookies__grid">
+                <div class="bookie-card" style="background: linear-gradient(135deg, #0891b2, #06b6d4);">
+                    <span>sportsbet</span>
+                </div>
+                <div class="bookie-card" style="background: #1a472a;">
+                    <span style="color: #fbbf24; font-weight: 800;">bet365</span>
+                </div>
+                <div class="bookie-card" style="background: #000;">
+                    <span style="font-weight: 800;">TAB</span>
+                </div>
+                <div class="bookie-card" style="background: #1e3a5f;">
+                    <span style="color: #22d3ee;">mybet</span>
+                </div>
+                <div class="bookie-card" style="background: #059669;">
+                    <span>betfair</span>
+                </div>
+                <div class="bookie-card" style="background: linear-gradient(135deg, #0ea5e9, #22d3ee);">
+                    <span style="font-weight: 800;">EASY</span>
+                </div>
+                <div class="bookie-card" style="background: #2563eb;">
+                    <span style="font-weight: 900; font-size: 1.5rem;">B</span>
+                </div>
+                <div class="bookie-card" style="background: linear-gradient(135deg, #dc2626, #2563eb);">
+                    <span style="font-weight: 900; font-size: 1.25rem;">BB</span>
+                </div>
+                <div class="bookie-card" style="background: #ea580c;">
+                    <span style="font-weight: 700;">BOOM</span>
+                </div>
+                <div class="bookie-card" style="background: #dc2626;">
+                    <span style="font-weight: 800; font-style: italic;">L</span>
+                </div>
+                <div class="bookie-card" style="background: #ea580c;">
+                    <span style="font-weight: 800;">neds</span>
+                </div>
+                <div class="bookie-card" style="background: #65a30d;">
+                    <span style="font-weight: 700;">OKE</span>
+                </div>
+                <div class="bookie-card" style="background: #64748b;">
+                    <span style="font-weight: 800;">PB</span>
+                </div>
+                <div class="bookie-card" style="background: #7c3aed;">
+                    <span style="font-size: 0.7rem;">picklebet</span>
+                </div>
+                <div class="bookie-card" style="background: #000;">
+                    <span style="font-weight: 800;">POINTS</span>
+                </div>
+                <div class="bookie-card" style="background: #000;">
+                    <span>TopSport</span>
+                </div>
+                <div class="bookie-card" style="background: #000;">
+                    <span style="color: #22c55e; font-weight: 700;">U</span>
+                </div>
+                <div class="bookie-card" style="background: var(--dark-card); border: 1px dashed var(--dark-border);">
+                    <span style="font-size: 0.6rem; color: var(--gray);">More Coming</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__logo">WagerX AU</div>
+        <p>AI-powered sports betting picks for Aussie punters.</p>
+        <div class="footer__links">
+            <a href="https://x.com/wagerx" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://instagram.com/wagerx" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.gg/XKvyHPbJ" target="_blank"><i class="fab fa-discord"></i></a>
+        </div>
+        <p class="footer__legal">
+            © 2026 WagerX AU. Gamble responsibly. 18+
+        </p>
+    </footer>
+
+    <script>
+        // Spots counter
+        // UPDATE THIS NUMBER manually based on your Discord member count
+        // Formula: 3000 - current Discord members = spots remaining
+        const SPOTS_REMAINING = 2998; // 3000 - 2 members = 2998
+        
+        function updateDisplay() {
+            const formatted = SPOTS_REMAINING.toLocaleString();
+            document.getElementById('spotsLeft').textContent = formatted;
+            const spots2 = document.getElementById('spotsLeft2');
+            if (spots2) spots2.textContent = formatted;
+        }
+        
+        // Update display on load
+        updateDisplay();
+
+        // Review Modal Functions
+        let selectedRating = 5;
+
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.add('active');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.remove('active');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('reviewModal').addEventListener('click', function(e) {
+            if (e.target === this) closeReviewModal();
+        });
+
+        // Star rating interaction
+        document.querySelectorAll('.star-rating i').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.rating);
+                updateStars();
+            });
+            
+            star.addEventListener('mouseenter', function() {
+                const rating = parseInt(this.dataset.rating);
+                document.querySelectorAll('.star-rating i').forEach((s, i) => {
+                    s.classList.toggle('active', i < rating);
+                });
+            });
+        });
+
+        document.querySelector('.star-rating').addEventListener('mouseleave', updateStars);
+
+        function updateStars() {
+            document.querySelectorAll('.star-rating i').forEach((s, i) => {
+                s.classList.toggle('active', i < selectedRating);
+            });
+        }
+        updateStars();
+
+        function submitReview(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reviewName').value;
+            const location = document.getElementById('reviewLocation').value;
+            const text = document.getElementById('reviewText').value;
+            
+            // Create new review card
+            const slider = document.getElementById('reviewsSlider');
+            const newReview = document.createElement('div');
+            newReview.className = 'review-card';
+            
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < selectedRating) {
+                    starsHtml += '<i class="fas fa-star"></i>';
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>';
+                }
+            }
+            
+            newReview.innerHTML = `
+                <div class="review-card__header">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${name}" alt="${name}">
+                    <div>
+                        <h4>${name}</h4>
+                        <span>${location}</span>
+                    </div>
+                    <div class="verified-badge">
+                        <i class="fas fa-check"></i> Verified
+                    </div>
+                </div>
+                <div class="review-card__stars">
+                    ${starsHtml}
+                </div>
+                <p>"${text}"</p>
+            `;
+            
+            // Insert after the "Write Review" card
+            slider.insertBefore(newReview, slider.children[1]);
+            
+            // Close modal and redirect to Discord
+            closeReviewModal();
+            
+            // Show thank you message
+            alert('Thank you for your review! 🎉 You now have FREE lifetime access. Redirecting to Discord...');
+            
+            setTimeout(() => {
+                window.location.href = 'https://discord.gg/XKvyHPbJ';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
