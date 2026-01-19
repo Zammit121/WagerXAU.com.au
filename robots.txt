@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wagerxau-com-au.vercel.app/sitemap.xml
-
+Sitemap: https://wagerxaucom.vercel.app/sitemap.xml
